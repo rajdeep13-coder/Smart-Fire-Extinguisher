@@ -1,4 +1,4 @@
-# IOTRICITY S3: ML Based Smart Fire Extinguisher
+# EDGE-ML Based Smart Fire Extinguisher System
 
 ![IoT](https://img.shields.io/badge/IoT-Project-blue?style=for-the-badge)
 ![Hackathon](https://img.shields.io/badge/IoTricity-S3-blue?style=for-the-badge)
@@ -6,8 +6,9 @@
 ![Arduino](https://img.shields.io/badge/Arduino-C++-lightblue?style=for-the-badge)
 [![Open in Wokwi](https://img.shields.io/badge/Simulate%20in-Wokwi-00a98f?logo=wokwi&logoColor=white)](https://wokwi.com/)
 
+The Edge ML–Based Autonomous Fire Extinguisher is a real-time, vision-guided safety system designed to detect, track, and extinguish localized fires autonomously without human intervention. By replacing conventional proximity-based scanning methods with an optimized YOLOv8 computer vision model running entirely on local edge hardware, the system accurately extracts spatial coordinates of active flames from camera feeds. These visual coordinates are coupled with environmental verification sensors to dynamically direct a two-axis servo-actuated water cannon and deploy a suppression payload with sub-second response times.
 
-An Arduino Uno fire-monitoring and targeting prototype that combines smoke detection with ultrasonic ranging. When a potential fire is detected, two servo-mounted water cannons sweep the area, identify the closest target angle, and hold that position while the alert indicators remain active.
+For technical details and future scope, see [details.md](details.md).
 
 <p align="center">
   <a href="https://github.com/rajdeep13-coder/Smart-Fire-Extinguisher">
@@ -15,6 +16,13 @@ An Arduino Uno fire-monitoring and targeting prototype that combines smoke detec
   </a>
 </p>
 
+# Wokwi Simulation: <a href="https://wokwi.com/projects/476314925594840065">
+
+## The Problem
+Traditional automated fire suppression systems—such as ceiling-mounted thermal glass-bulb sprinklers—suffer from notable limitations:
+-Delayed Response: They require ambient ceiling temperatures to exceed critical thresholds before activating, allowing flames to spread significantly.
+-Collateral Water Damage: Sprinklers flood broad zones rather than targeting the localized base of the flame.
+-Limited Spatial Intelligence: Ultrasonic- and basic IR-based prototypes sweep mechanically across broad zones with high false-positive rates and struggle to distinguish actual flame contours from warm bodies or physical obstacles.
 
 ## Features
 
@@ -77,8 +85,6 @@ The smoke threshold is mapped from a potentiometer reading of `0-1023` to a usab
 | Potentiometer | Wiper | A0 | Smoke-threshold control |
 | SSD1306 OLED | SDA | A4 | I2C data |
 | SSD1306 OLED | SCL | A5 | I2C clock |
-
-Connect all component grounds together. In the included diagram, the servos and sensors are supplied from the breadboard 5 V and GND rails.
 
 
 ## OLED and Serial Output
