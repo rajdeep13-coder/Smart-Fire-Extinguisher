@@ -12,11 +12,13 @@ For technical details and future scope, see [details.md](details.md).
 
 <p align="center">
   <a href="https://github.com/rajdeep13-coder/Smart-Fire-Extinguisher">
-    <img src="/assets/circuit_sketch.jpeg" />
+    <img src="/assets/final simulation of circuit.png" />
   </a>
 </p>
 
-# Wokwi Simulation: <a href="https://wokwi.com/projects/476314925594840065">
+# Wokwi Simulation
+
+[Open the Wokwi simulation](https://wokwi.com/projects/476314925594840065)
 
 ## The Problem
 Traditional automated fire suppression systems—such as ceiling-mounted thermal glass-bulb sprinklers—suffer from notable limitations:
@@ -127,8 +129,6 @@ The main thresholds and timing values are defined near the top of `sketch.ino`:
 | `SCAN_STEP_DELAY_MS` | `60` | Servo settling time between samples |
 | `RESCAN_INTERVAL_MS` | `3000` | Delay before re-scanning while locked |
 | `ALARM_TONE_HZ` | `2000` | Buzzer frequency |
-
-```
 
 
 📢 Developed for IoTricity-S3 Hackathon by Assymetricals

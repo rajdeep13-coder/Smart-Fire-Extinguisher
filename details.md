@@ -4,6 +4,11 @@
 
 The Edge-ML based Smart Fire Extinguisher is designed as a locally controlled, vision-guided fire detection and suppression platform. Its architecture combines edge computer vision, environmental sensor fusion, geometric target alignment, and servo or pump actuation into one autonomous response loop.
 
+<p align="center">
+  <a href="https://github.com/rajdeep13-coder/Smart-Fire-Extinguisher">
+    <img src="/assets/yolo model test.jpeg" />
+  </a>
+</p>
 
 ## 1. Perception & Edge Inference
 
