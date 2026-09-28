@@ -10,8 +10,8 @@ def main():
     # You can adjust epochs (how many times it goes through data) based on your needs
     results = model.train(
         data="fire-detection.v1i.yolov8/data.yaml",   # Path to your dataset config file
-        epochs=15,          # Reduced for a faster initial test
-        imgsz=320,          # Reduced image size so it doesn't crash your 8GB RAM
+        epochs=50,          # Increased for better accuracy
+        imgsz=640,          # Increased image size to detect small objects like a lighter flame
         device="cpu"        # Running on CPU as requested
     )
 

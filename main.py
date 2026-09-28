@@ -125,7 +125,7 @@ def main():
                 cls = int(box.cls[0])
                 conf = float(box.conf[0])
                 
-                if conf > 0.3: 
+                if conf > 0.05: 
                     x1, y1, x2, y2 = map(int, box.xyxy[0])
                     
                     # Get the actual class name from the model
