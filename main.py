@@ -2,6 +2,7 @@ import cv2
 import time
 import threading
 import socket
+import serial
 from ultralytics import YOLO
 
 # Configuration
@@ -16,6 +17,16 @@ PING_PORT = 53
 is_wifi_connected = True
 current_model = None
 lock = threading.Lock()
+
+# Arduino Serial Configuration
+# UPDATE 'COM3' to the correct port for your Arduino (e.g., 'COM5', '/dev/ttyUSB0', etc.)
+try:
+    arduino = serial.Serial('COM3', 9600, timeout=1)
+    time.sleep(2) # Allow Arduino to reboot after connection
+    print("Arduino connected on COM3")
+except Exception as e:
+    arduino = None
+    print(f"Arduino connection failed: {e}. Running without hardware control.")
 
 def check_connection(host=PING_HOST, port=PING_PORT, timeout=3):
     """Check if there is an active internet connection."""
@@ -120,14 +131,27 @@ def main():
                     # Get the actual class name from the model
                     class_name = active_model.names[cls]
                     
-                    # If this is a custom model that actually has fire classes, we'd use our classifier
-                    # But since you are currently using the default YOLOv8 model, it detects you as a "person".
-                    # We will show the actual class name to avoid confusion until you train your fire model!
-                    label = f"{class_name} (Not Fire) {conf:.2f}"
+                    # Only display bounding box and label if "fire" is detected
+                    if class_name.lower() == "fire":
+                        label = f"Fire {conf:.2f}"
+                        
+                        # Calculate center coordinates for Arduino targeting
+                        cx = (x1 + x2) // 2
+                        cy = (y1 + y2) // 2
 
-                    # Draw bounding box and label
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
-                    cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                        # Print coordinates to your computer's terminal
+                        print(f"Fire Target -> X:{cx}, Y:{cy}")
+
+                        # Send coordinates to Arduino if connected
+                        if arduino is not None:
+                            # Format: "X:123,Y:456\n"
+                            command = f"X:{cx},Y:{cy}\n"
+                            arduino.write(command.encode('utf-8'))
+
+                        # Draw bounding box, label, and center targeting point
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                        cv2.circle(frame, (cx, cy), 5, (0, 255, 0), -1)
+                        cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
         # Display network status on screen
         color = (0, 255, 0) if is_wifi_connected else (0, 0, 255)
